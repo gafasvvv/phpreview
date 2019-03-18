@@ -10,7 +10,8 @@
 </head>
 <body>
     <div>
-        <a href="/post.php">投稿画面</a>
+        <h2>一覧画面</h2>
+        <a href="post.php">投稿画面へ</a>
     </div>
     <tr>
         <th>ID</th>
@@ -20,7 +21,8 @@
     </tr>
     <br />
     <?php
-        $readCsv = readCsv();
+        $csv = 'board.csv';
+        $readCsv = readCsv($csv);
     ?>
 </body>
 </html>
