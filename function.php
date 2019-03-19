@@ -20,20 +20,16 @@
 
     //csv書き込み関数
     function writeCsv($csv){
+        session_start();
         //csvファイルを開いて中身を読み込み
-        $file1 = fopen($csv, 'r');
-        $line = fgetcsv($file1, 1024, ",");
-        //配列で返ってきたデータから必要なidを取り出す
-        $id = $line[0];
-        $data[] = $_POST['title'];
-        $data[] = $_POST['body'];
-        //取り出したidに対して+1カウントアップし先頭に追加
-        array_unshift($data, $id+1);
-        //ユーザは田中だけなので末尾に'1'を追加
-        array_push($data,'1');
-        $file2 = @fopen($csv, 'ab') or die('ファイルが開けませんでした。');
-        fwrite($file2, implode(",", $data)."\n");
-        fclose($file1);
+        $file = fopen($csv, 'r');
+        $data[0] = $_POST['title'];
+        $data[1] = $_POST['body'];
+        //user_idを先頭に追加
+        array_unshift($data,$_SESSION['user']['user_id']);
+        $file = @fopen($csv, 'ab') or die('ファイルが開けませんでした。');
+        fwrite($file, implode(",", $data)."\n");
+        fclose($file);
     }
     
     //ログインに関する関数
@@ -42,19 +38,17 @@
         session_start();
         //csvファイルを開いて中身を読み込み
         $file = fopen('csv/user.csv', 'r+');
-        $line = fgetcsv($file, 1024, ",");
-        //配列で返ってきたデータから必要なuser_idを取り出す
-        $user_id = $line[2];
-        //user.csvのuser_idと入力されたユーザーIDとが合致するかの処理       
-        if($_POST['user_id'] === $user_id){
-            $_SESSION['user_id'] = $_POST['user_id'];
-            header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'index.php');
-        } //合致しなければログイン画面へリダイレクト
-        else {
-            header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'login.php');
-        }
-        //csvファイルを閉じる
-        fclose($file);
+        //user.csvのuser_idを検索し、一致したらログインする
+        while($array = fgetcsv($file, 1024, ",")){
+            if($_POST['user_id'] == $array[2]){
+                $_SESSION['user']['id'] = $array[0];
+                $_SESSION['user']['name'] = $array[1];
+                $_SESSION['user']['user_id'] = $array[2];
+                //csvファイルを閉じる
+                fclose($file);
+                header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'index.php');
+                } 
+        }  
     }
 
     //セッション削除に関する関数

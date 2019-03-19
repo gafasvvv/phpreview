@@ -1,6 +1,8 @@
 <?php
+    //session_start関数でセッション開始
+    session_start();
     require_once './function.php';
-    if(empty($_SESSION['user_id'])){
+    if(empty($_SESSION['user']['user_id'])){
         //login.phpへリダイレクト
         header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'login.php');
     }

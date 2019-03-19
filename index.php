@@ -1,6 +1,8 @@
 <?php
+    //session_start関数でセッション開始
+    session_start();
     require_once './function.php';
-    if(empty($_SESSION['user_id'])){
+    if(empty($_SESSION['user']['user_id'])){
         //login.phpへリダイレクト
         header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'login.php');
     }
@@ -16,10 +18,9 @@
         <a href="post.php">投稿画面へ</a>
     </div>
     <tr>
-        <th>ID</th>
+        <th>user_id</th>
         <th>タイトル</th>
         <th>本文</th>
-        <th>USER ID</th>
     </tr>
     <br />
     <?php
