@@ -1,8 +1,10 @@
 <?php
-    require_once './encode.php';
     require_once './function.php';
+    if(empty($_SESSION['user_id'])){
+        //login.phpへリダイレクト
+        header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'login.php');
+    }
 ?>
-
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -21,7 +23,7 @@
     </tr>
     <br />
     <?php
-        $csv = 'board.csv';
+        $csv = 'csv/board.csv';
         $readCsv = readCsv($csv);
     ?>
 </body>

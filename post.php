@@ -1,3 +1,10 @@
+<?php
+    require_once './function.php';
+    if(empty($_SESSION['user_id'])){
+        //login.phpへリダイレクト
+        header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'login.php');
+    }
+?>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -6,7 +13,7 @@
 <body>
     <div>
         <h2>投稿画面</h2>
-        <a href="/index.php">一覧画面へ</a>
+        <a href="index.php">一覧画面へ</a>
     </div>
     <form method="POST" action="write.php">
         <label for="title">タイトル: </label>
