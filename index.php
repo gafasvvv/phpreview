@@ -1,10 +1,10 @@
 <?php
     //session_start関数でセッション開始
     session_start();
-    require_once './function.php';
+    require_once './Csv.php';
     if(empty($_SESSION['user']['user_id'])){
         //login.phpへリダイレクト
-        header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'login.php');
+        header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'loginform.php');
     }
 ?>
 <!DOCTYPE html>
@@ -24,8 +24,8 @@
     </tr>
     <br />
     <?php
-        $csv = 'csv/board.csv';
-        $readCsv = readCsv($csv);
+        $csv = new Csv('csv/board.csv');
+        $csv -> readCsv();
     ?>
 </body>
 </html>
