@@ -1,10 +1,6 @@
 <?php
-    //session_start関数でセッション開始
-    session_start();
-    if(empty($_SESSION['user']['user_id'])){
-        //login.phpへリダイレクト
-        header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'loginform.php');
-    }
+    require_once 'BbsController.php';
+    BbsController::redirect();
 ?>
 <!DOCTYPE html>
 <head>
@@ -16,7 +12,7 @@
         <h2>投稿画面</h2>
         <a href="index.php">一覧画面へ</a>
     </div>
-    <form method="POST" action="write.php">
+    <form method="POST" action="create.php">
         <label for="title">タイトル: </label>
         <input id="title" type="text" name="title" size="20" />
         <br />

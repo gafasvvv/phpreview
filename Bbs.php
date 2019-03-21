@@ -1,6 +1,6 @@
 <?php
 
-    class Csv {
+    class Bbs {
 
         //プロパティの設定
         public $csv;
@@ -36,4 +36,5 @@
             fwrite($file, implode(",", $data)."\n");
             fclose($file);
         }
+        
     }

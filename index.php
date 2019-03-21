@@ -1,11 +1,6 @@
 <?php
-    //session_start関数でセッション開始
-    session_start();
-    require_once './Csv.php';
-    if(empty($_SESSION['user']['user_id'])){
-        //login.phpへリダイレクト
-        header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'loginform.php');
-    }
+    require_once 'BbsController.php';
+    BbsController::redirect();
 ?>
 <!DOCTYPE html>
 <head>
@@ -24,8 +19,8 @@
     </tr>
     <br />
     <?php
-        $csv = new Csv('csv/board.csv');
-        $csv -> readCsv();
+        $bbsController = new BbsController();
+        $bbsController -> index();
     ?>
 </body>
 </html>
