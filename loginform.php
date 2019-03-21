@@ -1,8 +1,9 @@
 <?php
-    //関数をまとめたファイルの読み込み
-    require_once './function.php';
-    //session_start関数でセッション開始
-    session_start();
+    //htmlspecialchars関数の読み込み
+    require_once './htmlspecialchars.php';
+    require_once 'Login.php';
+    $login = new Login();
+    $login -> login();
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
 </head>
 <body>
     <div>
-    <form method="POST" action="session.php">
+    <form method="POST" action="">
         <h2>ログイン画面</h2>
         <label for="user_id">ユーザーID: </label>
         <input id="user_id" type="text" name="user_id" size="20"
