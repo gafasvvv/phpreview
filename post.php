@@ -1,6 +1,6 @@
 <?php
-    require_once 'BbsController.php';
-    BbsController::redirect();
+    require_once 'DatabaseController.php';
+    DatabaseController::redirect();
 ?>
 <!DOCTYPE html>
 <head>

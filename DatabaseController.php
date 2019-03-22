@@ -1,19 +1,19 @@
 <?php
 
-    require_once 'Bbs.php';
+    require_once 'Database.php';
 
-    class BbsController {
+    class DatabaseController {
 
         //一覧表示
         public function index(){
-            $bbs = new Bbs('csv/board.csv');
-            $bbs -> readCsv();
+            $bbs = new Database();
+            $bbs -> selectData();
         }
 
         //新規投稿
         public function create(){
-            $bbs = new Bbs('csv/board.csv');
-            $bbs -> writeCsv();
+            $bbs = new Database();
+            $bbs -> insertData();
             //index.phpへリダイレクト
             header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'index.php');
         }
